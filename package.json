@@ -13,6 +13,23 @@
   "author": "Paulo André Rieck",
   "license": "MIT",
   "dependencies": {
-
-  }
+    "express": "^4.17.1",
+      "express-session": "^1.16.2",
+      "git-clone-promise": "^1.0.0",
+      "nedb-session-store": "^1.1.2",
+      "path": "^0.12.7",
+      "rimraf": "^3.0.0",
+      "temp-dir": "^2.0.0",
+      "ws": "^7.1.2"
+  },
+  "bin": {
+    "electron-builder-online-mac": "./startup.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/paulorieck/electron-builder-online-win.git"
+  },
+  "os": [
+    "win32"
+  ]
 }
