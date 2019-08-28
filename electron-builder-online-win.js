@@ -72,21 +72,21 @@ function cloneGit(repository, execution_path, socket, callback) {
         spawn: false
     }
 
-    const git = spawn("c:\\Program Files\\Git\\cmd\\git.exe", args, options);
+    const git = spawn("git.exe", args, options);
 
     git.stdout.on('data', (log) => {
-        console.log('YARN stdout: '+log);
+        console.log('git stdout: '+log);
         socket.send(JSON.stringify({"op": "console_output", "message": 'git stdout: '+log}));
     });
 
     git.stderr.on('data', (log) => {
-        console.log('YARN stderr: '+log);
+        console.log('git stderr: '+log);
         socket.send(JSON.stringify({"op": "console_output", "message": 'git stderr: '+log}));
     });
 
     git.on('close', (code) => {
         
-        console.log('YARN child process exited with code '+code);
+        console.log('git child process exited with code '+code);
         socket.send(JSON.stringify({"op": "console_output", "message": 'git child process exited with code '+code}));
 
         callback();
@@ -236,7 +236,7 @@ wss.on('connection', (socket, req) => {
             rimraf(path.join(tempDirectory, parameters.name), [], function () { // Removes directory
 
                 // Downloads the GIT repository content to the newly created repository
-                cloneGit(parameters.repository, path.join(tempDirectory, parameters.name), socket, function () {
+                cloneGit(parameters.repository, tempDirectory, socket, function () {
 
                     console.log("Clonned your repo succesfully!");
 
