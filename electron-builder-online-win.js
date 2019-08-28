@@ -269,8 +269,6 @@ wss.on('connection', (socket, req) => {
 
                     }
 
-                }).catch(function (error) {
-                    console.log("Error: "+error);
                 });
 
             });
