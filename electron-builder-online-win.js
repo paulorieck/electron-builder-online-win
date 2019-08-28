@@ -69,11 +69,10 @@ function cloneGit(repository, execution_path, socket, callback) {
 
     const options = {
         cwd: execution_path,
-        spawn: false,
-        env: {PATH: process.env.PATH+";c:\\Program Files\\Git\\cmd"}
+        spawn: false
     }
 
-    const git = spawn("git", args, options);
+    const git = spawn("c:\\Program Files\\Git\\cmd\\git.exe", args, options);
 
     git.stdout.on('data', (log) => {
         console.log('YARN stdout: '+log);
