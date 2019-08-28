@@ -69,7 +69,8 @@ function cloneGit(repository, execution_path, socket, callback) {
 
     const options = {
         cwd: execution_path,
-        spawn: false
+        spawn: false,
+        env: {PATH: process.env.PATH+";c:\\Program Files\\Git\\cmd"}
     }
 
     const git = spawn("git", args, options);
