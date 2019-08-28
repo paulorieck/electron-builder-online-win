@@ -69,7 +69,8 @@ function cloneGit(repository, execution_path, socket, callback) {
 
     const options = {
         cwd: execution_path,
-        spawn: false
+        spawn: false,
+        env: {PATH: process.env.PATH+";C:\\Program Files\\Git\\cmd"}
     }
 
     const git = spawn("git.exe", args, options);
@@ -85,6 +86,10 @@ function cloneGit(repository, execution_path, socket, callback) {
     });
 
     git.on('close', (code) => {
+
+        if ( code === 128 ) {
+            code = 0;
+        }
         
         console.log('git child process exited with code '+code);
         socket.send(JSON.stringify({"op": "console_output", "message": 'git child process exited with code '+code}));
