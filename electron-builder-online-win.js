@@ -141,16 +141,14 @@ function runNPM(socket, execution_path, callback) {
 
     socket.send(JSON.stringify({"op": "console_output", "message": 'Starting "npm install"'}));
 
-    const {spawn} = require('child_process');
-
-    var args = ["install"];
+    const {exec} = require('child_process');
 
     const options = {
         cwd: execution_path,
-        spawn: false
+        maxBuffer: 2000*1024
     }
 
-    const electron = spawn("npm", args, options);
+    const electron = exec("npm.cmd install", options);
 
     electron.stdout.on('data', (log) => {
         console.log('NPM stdout: '+log);
@@ -177,16 +175,14 @@ function runElectronBuilder(socket, parameters, execution_path, callback) {
 
     socket.send(JSON.stringify({"op": "console_output", "message": 'Starting "electron-builder"'}));
 
-    const {exec, spawn} = require('child_process');
-
-    console.log("parameters.gh_token: "+parameters.gh_token);
+    const {spawn} = require('child_process');
 
     var args = ["--publish=always"];
 
     const options = {
         cwd: execution_path,
         spawn: false,
-        env: {GH_TOKEN: parameters.gh_token, PATH: process.env.PATH}
+        env: {GH_TOKEN: parameters.gh_token, PATH: process.env.PATH, APPDATA: process.env.APPDATA}
     }
 
     const electron = spawn("electron-builder", args, options);

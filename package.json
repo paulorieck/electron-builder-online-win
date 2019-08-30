@@ -1,6 +1,6 @@
 {
   "name": "electron-builder-online-win",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "Build electron applications online for windows, linux and mac os x. Automatically deploy them to GitHub Releases",
   "main": "electron-builder-online.js",
   "scripts": {
@@ -22,7 +22,7 @@
       "ws": "^7.1.2"
   },
   "bin": {
-    "electron-builder-online-mac": "./startup.js"
+    "electron-builder-online-win": "./startup.js"
   },
   "repository": {
     "type": "git",
