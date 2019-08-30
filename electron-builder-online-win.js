@@ -145,7 +145,8 @@ function runNPM(socket, execution_path, callback) {
 
     const options = {
         cwd: execution_path,
-        maxBuffer: 2000*1024
+        maxBuffer: 2000*1024,
+        env: {PATH: process.env.PATH, APPDATA: process.env.APPDATA}
     }
 
     const electron = exec("npm.cmd install", options);
