@@ -87,10 +87,6 @@ function cloneGit(repository, execution_path, socket, callback) {
 
     git.on('close', (code) => {
 
-        if ( code === 128 ) {
-            code = 0;
-        }
-        
         console.log('git child process exited with code '+code);
         socket.send(JSON.stringify({"op": "console_output", "message": 'git child process exited with code '+code}));
 
